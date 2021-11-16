@@ -10,13 +10,11 @@ import './app.css';
 function App () {
 
 	const data = [
-		{name: 'Петр Д.', salary: 800, increase: false},
-		{name: 'Валерий М.', salary: 1100, increase: false},
-		{name: 'Черно С.', salary: 1600, increase: true},
-		{name: 'Игорь Л.', salary: 2600, increase: false},
-		{name: 'Варвара Г.', salary: 100000000, increase: true},
-		{name: 'Елена Г.', salary: 90000, increase: true},
-
+		{name: 'Петр Д.', salary: 800, increase: false, id: 1},
+		{name: 'Валерий М.', salary: 1100, increase: false, id: 2},
+		{name: 'Черно С.', salary: 1600, increase: true, id: 3},
+		{name: 'Игорь Л.', salary: 2600, increase: false, id: 4},
+		{name: 'Варвара Г.', salary: 100000000, increase: true, id: 5},
 	]
 
 	return (
