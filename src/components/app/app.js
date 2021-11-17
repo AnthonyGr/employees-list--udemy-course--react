@@ -21,6 +21,7 @@ class App extends Component {
 				{name: 'Варвара Г.', salary: 100000000, increase: true, id: 5},
 			]
 		}
+		this.maxId = 5
 	}
 
 	deleteItem = (id) => {
@@ -31,7 +32,17 @@ class App extends Component {
 		})
 	}
 
+	addItem = (name, salary) => {
+		this.maxId = this.maxId + 1
+		this.setState(({data}) => {
+			return {
+				data: data.concat({name: name, salary: salary, increase: false, id: this.maxId})
+			}
+		})
+	}
+
 	render() {
+		
 		return (
 			<div className="app">
 				<AppInfo/>
@@ -42,7 +53,8 @@ class App extends Component {
 				<EmployeesList
 					data={this.state.data}
 					onDelete={this.deleteItem}/>
-				<EmployeesAddForm/>
+				<EmployeesAddForm
+					onAdd= {this.addItem}/>
 			</div>
 		)
 	}
