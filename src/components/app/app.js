@@ -17,7 +17,6 @@ class App extends Component {
 				{name: 'Петр Д.', salary: 800, increase: false, rise: true, id: 1},
 				{name: 'Валерий М.', salary: 1100, increase: false, rise: false, id: 2},
 				{name: 'Черно С.', salary: 1600, increase: true, rise: false, id: 3},
-
 			]
 		}
 		this.maxId = 3
@@ -86,7 +85,8 @@ class App extends Component {
 		
 		return (
 			<div className="app">
-				<AppInfo />
+				<AppInfo
+					dataLength={this.state.data.length}/>
 				<div className="search-panel">
 					<SearchPanel/>
 					<AppFilter/>
