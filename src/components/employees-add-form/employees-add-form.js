@@ -18,13 +18,24 @@ class EmployeesAddForm extends Component {
 
 	onSumbit = (e) => {
 		e.preventDefault()
+		
+		if (this.state.name.match(/^[a-zA-Z_ ]*$/) &&
+			this.state.name.length > 1 &&
+			this.state.salary[0] !== "0" &&
+		 	this.state.salary !== "") {
+				this.props.onAdd(this.state.name, this.state.salary)
+		} else {
+			alert('Введите коррентные данные')
+		}
+
 		//Сброс формы
-		this.props.onAdd(this.state.name, this.state.salary)
 		this.setState({
 			name: '',
 			salary: ''
 		})
 	}
+
+
 
 	render() {
 		const {name, salary} = this.state
