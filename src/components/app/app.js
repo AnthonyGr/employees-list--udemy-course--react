@@ -81,14 +81,25 @@ class App extends Component {
 		console.log(`Rise this ${id}`)
 	}
 
+	getIncreasedCount = () => {
+		let count = 0
+		for (let item of this.state.data) {
+			if (item.increase){
+				count++
+			}
+		}
+		return count
+	}
+
 	render() {
 		
 		return (
 			<div className="app">
 				<AppInfo
-					dataLength={this.state.data.length}/>
+					dataLength={this.state.data.length}
+					increasedCount={this.getIncreasedCount()}/>
 				<div className="search-panel">
-					<SearchPanel/>
+					<SearchPanel />
 					<AppFilter/>
 				</div>
 				<EmployeesList
