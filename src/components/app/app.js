@@ -15,10 +15,11 @@ class App extends Component {
 		this.state = {
 			data: [
 				{name: 'Alex Petter', salary: 800, increase: false, rise: true, id: 1},
-				{name: 'Mick Jagger', salary: 1100, increase: false, rise: false, id: 2},
+				{name: 'Mick Jagger', salary: 1100, increase: false, rise: true, id: 2},
 				{name: 'Sergio Blacket', salary: 1600, increase: true, rise: false, id: 3},
 			],
-			term: ''
+			term: '',
+			filter: 'all'
 		}
 		this.maxId = 3
 	}
@@ -35,7 +36,7 @@ class App extends Component {
 		this.maxId = this.maxId + 1
 		this.setState(({data}) => {
 			return {
-				data: data.concat({name: name, salary: salary, increase: false, raise: false, id: this.maxId})
+				data: data.concat({name: name, salary: salary, increase: false, rise: false, id: this.maxId})
 			}
 		})
 	}
@@ -92,11 +93,29 @@ class App extends Component {
 		this.setState({term})
 	}
 
+	//Действия, которые совершает user - указывать через on
+	onFilterSelect = (filter) => {
+		this.setState({filter})
+	}
+
+	filterPost = (items, filter) => {
+			switch (filter) {
+				case 'rise':
+					return items.filter(item => item.rise)
+				case 'moreThen1000':
+					return items.filter(item => item.salary > 1000)
+				case 'increase':
+						return items.filter(item => item.increase)
+				default:
+					return items
+			}		
+		}
+	
 	render() {
-		const {data, term} = this.state
+		const {data, term, filter} = this.state
 		const employees = this.state.data.length
 		const increased = this.state.data.filter(item => item.increase).length
-		const visibleData = this.searchEmployee(data, term)
+		const visibleData = this.filterPost(this.searchEmployee(data, term), filter)
 		return (
 			<div className="app">
 				<AppInfo
@@ -105,7 +124,9 @@ class App extends Component {
 				<div className="search-panel">
 					<SearchPanel
 						onUpdateSearch={this.onUpdateSearch}/>
-					<AppFilter/>
+					<AppFilter
+						filter={filter}
+						onFilterSelect={this.onFilterSelect}/>
 				</div>
 				<EmployeesList
 					data={visibleData}
